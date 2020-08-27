@@ -7,6 +7,11 @@ import './styles/iconfont.css'
 // 导入vant
 import Vant from 'vant'
 import 'vant/lib/index.css'
+// 导入amfe-fiexible库
+import 'amfe-flexible'
+import HmHeader from './components/HmHeader.vue'
+// 全局注册组件
+Vue.component('hm-header', HmHeader)
 
 // 全局的吧vant所有的组件都导入好了
 Vue.use(Vant)
