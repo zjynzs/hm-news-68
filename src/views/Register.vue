@@ -61,12 +61,17 @@ export default {
   },
   methods: {
     async register() {
-      console.log('注册')
+      // console.log('注册')
       const res = await this.$axios.post('/register', this.user)
       const { statusCode, message } = res.data
       if (statusCode === 200) {
         this.$toast.success(message)
-        this.$router.push('/login')
+        console.log(this.user)
+        // this.$router.push(`/login?username=${this.user.username}&password=${this.user.password}`)
+        this.$router.push({
+          name: 'login',
+          params: this.user
+        })
       } else {
         this.$toast.fail(message)
       }
@@ -75,6 +80,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='less' scoped>
+.tips {
+  padding: 15px;
+  font-size: 16px;
+  text-align: right;
+  a {
+    color: orange;
+  }
+}
 </style>
