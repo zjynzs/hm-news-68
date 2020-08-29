@@ -11,16 +11,24 @@ import 'vant/lib/index.css'
 import 'amfe-flexible'
 import HmHeader from './components/HmHeader.vue'
 import HmLogo from './components/HmLogo.vue'
+import HmNavItem from './components/HmNavItem.vue'
 import axios from 'axios'
+import mometh from 'moment'
 
 // 把sxios挂载到vue原型上
 Vue.prototype.$axios = axios
 // 给axos配置默认的baseURL，基准地址
 axios.defaults.baseURL = 'http://localhost:3000'
 
+// 定义全局过滤器
+Vue.filter('time', input => {
+  return mometh(input).format('YYYY-MM-DD')
+})
+
 // 全局注册组件
 Vue.component('hm-header', HmHeader)
 Vue.component('hm-logo', HmLogo)
+Vue.component('hm-navitem', HmNavItem)
 
 // 全局的吧vant所有的组件都导入好了
 Vue.use(Vant)
