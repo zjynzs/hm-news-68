@@ -35,6 +35,9 @@
            <template #content>文章/视频</template>
          </hm-navitem>
          <hm-navitem to="/edit">设置</hm-navitem>
+         <div style="margin: 15px;">
+           <van-button type="danger" block @click="logout">退出</van-button>
+         </div>
   </div>
 </template>
 
@@ -52,16 +55,33 @@ export default {
   },
   async created() {
     // token必须放到请求头中， 请求头 Authorization
-    const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
-    const res = await this.$axios.get(`/user/${userId}`, {
-      headers: {
-        Authorization: token
-      }
-    })
+    const res = await this.$axios.get(`/user/${userId}`)
+    // console.log(res.data)
     const { statusCode, data } = res.data
     if (statusCode === 200) {
       this.user = data
+    }
+  },
+  methods: {
+    logout() {
+      // console.log(123)
+      // 弹框提醒
+      this.$dialog.confirm({
+        title: '温馨提示',
+        message: '你确定要退出本系统吗?'
+      })
+        .then(() => {
+          // console.log('确定')
+          localStorage.removeItem('token')
+          localStorage.removeItem('userId')
+          this.$router.push('/login')
+          this.$toast.success('退出成功')
+        })
+        .catch(() => {
+          // console.log('取消')
+          this.$toast('取消退出')
+        })
     }
   }
 }

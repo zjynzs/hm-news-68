@@ -33,7 +33,7 @@
 // import axios from 'axios'
 export default {
   created() {
-    console.log(this.$route)
+    // console.log(this.$route)
     const { username, password } = this.$route.params
     this.username = username
     this.password = password
