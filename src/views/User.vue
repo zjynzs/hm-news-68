@@ -64,24 +64,22 @@ export default {
     }
   },
   methods: {
-    logout() {
+    async logout() {
       // console.log(123)
       // 弹框提醒
-      this.$dialog.confirm({
-        title: '温馨提示',
-        message: '你确定要退出本系统吗?'
-      })
-        .then(() => {
-          // console.log('确定')
-          localStorage.removeItem('token')
-          localStorage.removeItem('userId')
-          this.$router.push('/login')
-          this.$toast.success('退出成功')
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '你确定要退出本系统吗?'
         })
-        .catch(() => {
-          // console.log('取消')
-          this.$toast('取消退出')
-        })
+      } catch {
+        return this.$toast('取消退出')
+      }
+      // 说明点了确定
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      this.$router.push('/login')
+      this.$toast.success('退出成功')
     }
   }
 }

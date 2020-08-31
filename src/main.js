@@ -20,6 +20,7 @@ Vue.prototype.$axios = axios
 // 给axos配置默认的baseURL，基准地址
 axios.defaults.baseURL = 'http://localhost:3000'
 // 给axios配置拦截器
+// 请求拦截器
 axios.interceptors.request.use(function(config) {
   // 在发送请求之前做些什么
   // console.log('拦截到了请求', config)
@@ -29,6 +30,7 @@ axios.interceptors.request.use(function(config) {
   }
   return config
 })
+// 响应拦截器
 axios.interceptors.response.use(function(response) {
   // 在发送请求之前做些什么
   // console.log('拦截到了响应', response)
