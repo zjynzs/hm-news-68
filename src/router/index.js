@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register'
 import User from '../views/User.vue'
+import UserEdit from '../views/UserEdit.vue'
 
 Vue.use(VueRouter)
 // 全局的把push的异常给处理了
@@ -15,7 +16,8 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
   { path: '/login', component: Login, name: 'login' },
   { path: '/register', component: Register, name: 'register' },
-  { path: '/user', component: User, name: 'user' }
+  { path: '/user', component: User, name: 'user' },
+  { path: '/user-edit', component: UserEdit, name: 'user-edit' }
 ]
 
 const router = new VueRouter({
@@ -44,7 +46,9 @@ router.beforeEach(function(to, from, next) {
   //   next()
   // }
   const token = localStorage.getItem('token')
-  if (to.name !== 'user' || token) {
+  // 需要拦截的所有页面
+  const authUrls = ['/user', '/user-edit']
+  if (!authUrls.includes(to.path) || token) {
     next()
   } else {
     router.push('/login')
