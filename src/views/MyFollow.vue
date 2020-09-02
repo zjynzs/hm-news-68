@@ -11,7 +11,7 @@
           <p>{{item.create_data | time}}</p>
         </div>
         <div class="right">
-          <van-button type="primary" round size="small">取消关注</van-button>
+          <van-button type="primary" round size="small" @click="unfollow(item.id)">取消关注</van-button>
         </div>
       </div>
     </div>
@@ -26,11 +26,33 @@ export default {
     }
   },
   async created() {
-    const res = await this.$axios.get('/user_follows')
-    console.log(res.data)
-    const { statusCode, data } = res.data
-    if (statusCode === 200) {
-      this.list = data
+    this.getFollowList()
+  },
+  methods: {
+    async getFollowList() {
+      const res = await this.$axios.get('/user_follows')
+      console.log(res.data)
+      const { statusCode, data } = res.data
+      if (statusCode === 200) {
+        this.list = data
+      }
+    },
+    async unfollow(id) {
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '你确定要取消关注该用户吗'
+        })
+      } catch {
+        return this.$toast('取消操作')
+      }
+      // 发送请求，取消关注
+      const res = await this.$axios.get(`/user_unfollow/${id}`)
+      console.log(res.data)
+      if (res.data.statusCode === 200) {
+        this.$toast.success('取消关注成功')
+        this.getFollowList()
+      }
     }
   }
 }
