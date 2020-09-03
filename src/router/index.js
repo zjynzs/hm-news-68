@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 导入组件
-import Login from '../views/Login.vue'
-import Register from '../views/Register'
-import User from '../views/User.vue'
-import UserEdit from '../views/UserEdit.vue'
-import Demo from '../views/Demo.vue'
-import MyFollow from '../views/MyFollow.vue'
-import MyComment from '../views/MyComment.vue'
-import MyStar from '../views/MyStar'
+import Login from '../views/user/Login.vue'
+import Register from '../views/user/Register'
+import User from '../views/user/User.vue'
+import UserEdit from '../views/user/UserEdit.vue'
+import Demo from '../views/user/Demo.vue'
+import MyFollow from '../views/user/MyFollow.vue'
+import MyComment from '../views/user/MyComment.vue'
+import MyStar from '../views/user/MyStar'
+import Index from '../views/news/Index.vue'
 
 Vue.use(VueRouter)
 // 全局的把push的异常给处理了
@@ -25,7 +26,8 @@ const routes = [
   { path: '/demo', component: Demo },
   { path: '/myfollow', component: MyFollow, name: 'myfollow' },
   { path: '/mycomment', component: MyComment, name: 'mycomment' },
-  { path: '/mystar', component: MyStar, name: 'mystar' }
+  { path: '/mystar', component: MyStar, name: 'mystar' },
+  { path: '/', component: Index, name: 'index' }
 ]
 const router = new VueRouter({
   routes

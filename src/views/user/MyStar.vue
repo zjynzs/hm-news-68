@@ -68,7 +68,7 @@ export default {
       // 作用和background-size类似，，设置图片的大小
       // cover的缺点：保证图片覆盖完整的大小， 缺点：会有一部分被截取掉
       // contain: 保证图片被完整的显示，会有留白
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 }
