@@ -85,9 +85,12 @@ export default {
     onRefresh() {
       console.log('下拉刷新')
       setTimeout(() => {
+        // 重新加载第一页数据
         this.pageIndex = 1
-        this.loading = false
-        this.finished = true
+        // 防止之前已经没有数据了
+        this.loading = true
+        this.finished = false
+        // 下拉刷新需要清除原来的数据
         this.commentList = []
         this.getCommentList()
       }, 1000)
